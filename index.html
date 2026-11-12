@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,26 +12,26 @@
 <style>
 /* Layout: a quiet white page. One continuous grid of projects on a strict repeating pattern;
    the signage bar names every project. Every project page follows the same fixed sequence.
-   The only accent is the red dot. */
+   The only accent is the blue dot. */
 :root {
-  --wall: #F5F5F2;        /* soft white, slightly cool plaster */
-  --mat: #ECECE8;         /* frame mat behind each work */
+  --wall: #F5F5F5;        /* soft neutral white */
+  --mat: #ECECEC;         /* placeholder behind each image */
   --ink: #1D1E1C;         /* charcoal text */
   --muted: #686964;       /* captions, labels: 5:1 on the wall */
   --rule: #D9D9D3;        /* hairlines */
-  --dot: #C2372C;         /* the red dot: where you are, focus */
+  --dot: #002FA7;         /* the accent dot: where you are, focus */
   --font: "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --s-xs: 0.75rem; --s-sm: 0.875rem; --s-md: 1rem; --s-lg: 1.375rem; --s-xl: clamp(2rem, 5vw, 3.25rem);
   --gutter: clamp(16px, 4vw, 56px);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --wall: #161716; --mat: #1F201F; --ink: #E9E9E4; --muted: #8E8F89; --rule: #2E2F2D; --dot: #E0574A;
+    --wall: #161716; --mat: #1F201F; --ink: #E9E9E4; --muted: #8E8F89; --rule: #2E2F2D; --dot: #6F8CFF;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --wall: #161716; --mat: #1F201F; --ink: #E9E9E4; --muted: #8E8F89; --rule: #2E2F2D; --dot: #E0574A;
+  --wall: #161716; --mat: #1F201F; --ink: #E9E9E4; --muted: #8E8F89; --rule: #2E2F2D; --dot: #6F8CFF;
   color-scheme: dark;
 }
 
@@ -63,7 +63,7 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
 .plan a:hover { color: var(--ink); }
 .plan a::before { content: ""; position: absolute; left: 0; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; border: 1px solid var(--rule); box-sizing: border-box; }
 .plan a[aria-current="true"] { color: var(--ink); }
-/* the red dot: one marker that travels between Home, Projects and About */
+/* the accent dot: one marker that travels between Home, Projects and About */
 .plan .dot { position: absolute; left: 0; top: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--dot); pointer-events: none; transition: transform .55s cubic-bezier(.65,0,.25,1); }
 
 /* Project names, unfolded under the signage while a project is open */
@@ -445,7 +445,7 @@ function renderGallery() {
     <section class="entrance" data-zone="home">
       <h1 class="reveal" style="--i:${i++}">A product creator and developer who speaks the languages of Design, Engineering and Business.</h1>
       <p class="credit reveal" style="--i:${i++}">
-        <span>I enjoy working within constraints: real materials, real budgets and the people who will actually use the thing.</span>      </p>
+        <span>I enjoy working within constraints: budgets, challenging problems, and making sure solutions are user-centred.</span>      </p>
     </section>`;
 
   const pieces = SHOWN.map(w => `
@@ -579,6 +579,15 @@ function route() {
     if (target) target.scrollIntoView(); else window.scrollTo(0, 0);
   }
 }
+
+/* Pictures load whether they sit in an "images" folder or loose next to this file */
+document.addEventListener("error", e => {
+  const img = e.target;
+  if (img.tagName !== "IMG" || img.dataset.retried) return;
+  img.dataset.retried = "1";
+  const src = img.getAttribute("src") || "";
+  img.src = src.startsWith("images/") ? src.slice(7) : "images/" + src;
+}, true);
 
 renderGallery(); setZone("home");
 window.addEventListener("hashchange", route);

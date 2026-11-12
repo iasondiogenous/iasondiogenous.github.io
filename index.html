@@ -72,7 +72,14 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
 @keyframes unfold { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 
 /* ---------- Entrance ---------- */
-.entrance { padding-block: clamp(3.5rem, 9vw, 7rem) clamp(3rem, 7vw, 5.5rem); display: grid; gap: clamp(1.25rem, 3vw, 2rem); }
+.entrance { padding-block: clamp(3.5rem, 9vw, 7rem) clamp(3rem, 7vw, 5.5rem); display: grid; gap: clamp(1.75rem, 4vw, 3rem) clamp(2rem, 5vw, 4.5rem); align-items: start; }
+.entrance .words { display: grid; gap: clamp(1.25rem, 3vw, 2rem); min-width: 0; }
+.entrance .portrait { margin: 0; width: min(100%, 15rem); }
+.entrance .portrait img { width: 100%; height: auto; display: block; background: var(--band); }
+@media (min-width: 820px) {
+  .entrance { grid-template-columns: minmax(0, 1fr) clamp(13rem, 22vw, 19rem); }
+  .entrance .portrait { width: 100%; }
+}
 .entrance h1 { font-size: clamp(1.75rem, 4.2vw, 3.6rem); font-weight: 500; line-height: 1.08; letter-spacing: -0.03em; margin: 0; max-width: 34ch; text-wrap: balance; }
 .entrance .credit { display: grid; gap: 0.2rem; margin: 0; max-width: 52ch; font-size: var(--s-lg); line-height: 1.35; }
 .entrance .credit { color: var(--muted); }
@@ -439,9 +446,12 @@ function renderGallery() {
   let i = 0;
   const entrance = `
     <section class="entrance" data-zone="home">
+      <div class="words">
       <h1 class="reveal" style="--i:${i++}">A product creator and developer who speaks the languages of Design, Engineering and Business.</h1>
       <p class="credit reveal" style="--i:${i++}">
         <span>I enjoy working within constraints: budgets, challenging problems, and making sure solutions are user-centred.</span>      </p>
+      </div>
+      <figure class="portrait reveal" style="--i:${i++}"><img src="images/00-portrait.jpg" alt="Iason Diogenous" width="796" height="1062"></figure>
     </section>`;
 
   const pieces = SHOWN.map(w => `

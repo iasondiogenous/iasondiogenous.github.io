@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <title>Iason Diogenous — Portfolio</title>
 <meta name="description" content="Portfolio of Iason Diogenous: product design and development where design, engineering and business meet.">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -12,27 +13,21 @@
 <style>
 /* Layout: a quiet white page. One continuous grid of projects on a strict repeating pattern;
    the signage bar names every project. Every project page follows the same fixed sequence.
-   The only accent is the blue dot. */
+   Greys separate the layers: page, panels and heading bands. The only colour is the blue dot. */
 :root {
-  --wall: #F5F5F5;        /* soft neutral white */
-  --mat: #ECECEC;         /* placeholder behind each image */
-  --ink: #1D1E1C;         /* charcoal text */
-  --muted: #686964;       /* captions, labels: 5:1 on the wall */
-  --rule: #D9D9D3;        /* hairlines */
+  /* One light theme on every device. Five neutral greys, lightest to darkest: */
+  --wall: #F5F5F5;        /* page background */
+  --panel: #ECECEC;       /* foreground panels: top bar, fact strip, results, contact, footer */
+  --band: #E2E2E2;        /* section heading bands and image placeholders */
+  --rule: #D2D2D2;        /* hairlines */
+  --muted: #5F5F5F;       /* secondary text: at least 4.8:1 on every grey above */
+  --ink: #1C1C1C;         /* main text */
+  --mat: var(--band);
   --dot: #002FA7;         /* the accent dot: where you are, focus */
   --font: "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --s-xs: 0.75rem; --s-sm: 0.875rem; --s-md: 1rem; --s-lg: 1.375rem; --s-xl: clamp(2rem, 5vw, 3.25rem);
   --gutter: clamp(16px, 4vw, 56px);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --wall: #161716; --mat: #1F201F; --ink: #E9E9E4; --muted: #8E8F89; --rule: #2E2F2D; --dot: #6F8CFF;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --wall: #161716; --mat: #1F201F; --ink: #E9E9E4; --muted: #8E8F89; --rule: #2E2F2D; --dot: #6F8CFF;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -52,7 +47,7 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
 /* ---------- Signage bar: every project by name ---------- */
 .sign {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
-  background: var(--wall);
+  background: var(--panel);
   border-bottom: 1px solid var(--rule);
   margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);
 }
@@ -67,7 +62,7 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
 .plan .dot { position: absolute; left: 0; top: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--dot); pointer-events: none; transition: transform .55s cubic-bezier(.65,0,.25,1); }
 
 /* Project names, unfolded under the signage while a project is open */
-.subplan { border-top: 1px solid var(--rule); }
+.subplan { background: var(--band); margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
 .subplan ol { list-style: none; margin: 0; padding: 0.7rem 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.75rem; justify-content: flex-end; }
 .subplan li { animation: unfold .45s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i, 0) * 50ms); }
 .subplan a { text-decoration: none; font-size: var(--s-sm); color: var(--muted); display: inline-flex; gap: 0.5rem; transition: color .2s; }
@@ -83,7 +78,7 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
 .entrance .credit { color: var(--muted); }
 
 /* ---------- The wall ---------- */
-.hall-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--ink); }
+.hall-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.8rem 1.25rem; background: var(--band); }
 .hall-head h2 { margin: 0; font-size: var(--s-lg); font-weight: 500; letter-spacing: -0.01em; }
 .walls { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem); padding-top: clamp(2rem, 4vw, 3rem); }
 
@@ -108,8 +103,9 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
 .desk { padding-top: clamp(3rem, 7vw, 5rem); scroll-margin-top: 4rem; }
 .visitor { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 2rem 3rem; padding-top: 2.5rem; }
 .visitor p { margin: 0; max-width: 60ch; }
-.contact { display: grid; gap: 0.75rem; align-content: start; }
+.contact { display: grid; gap: 0.75rem; align-content: start; align-self: start; padding: 1.25rem; background: var(--panel); }
 .contact .row { padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule); min-width: 0; }
+.contact .row:last-child { padding-bottom: 0; border-bottom: 0; }
 .contact .row a { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 4px; transition: text-decoration-color .25s; }
 .contact .row a:hover { text-decoration-color: var(--dot); }
 
@@ -122,8 +118,8 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
 .ex-head h1 { font-size: var(--s-xl); font-weight: 500; line-height: 1.08; letter-spacing: -0.025em; margin: 0; max-width: 20ch; text-wrap: balance; }
 .ex-frame { aspect-ratio: 16 / 9; max-width: 100%; background: var(--mat); display: grid; place-items: center; padding: 6%; }
 .ex-frame .piece { width: 100%; height: 100%; border: 1px solid var(--rule); display: grid; place-items: center; color: var(--muted); font-size: var(--s-xs); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; padding: 1rem; }
-.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-top: 1px solid var(--rule); margin-top: 2rem; }
-.facts div { padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--rule); display: grid; gap: 0.25rem; min-width: 0; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.25rem 1.5rem; margin-top: 2rem; padding: 1.25rem; background: var(--panel); }
+.facts div { display: grid; gap: 0.25rem; align-content: start; min-width: 0; }
 .sections { display: grid; margin-top: clamp(2.5rem, 6vw, 4rem); }
 .cover-credit { margin: 0.75rem 0 0; font-size: var(--s-sm); color: var(--muted); }
 
@@ -158,17 +154,17 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
 .limits li { counter-increment: c; display: grid; grid-template-columns: 2.25rem 1fr; padding-block: 0.6rem; border-bottom: 1px solid var(--rule); }
 .limits li:first-child { padding-top: 0; }
 .limits li:last-child { border-bottom: 0; padding-bottom: 0; }
-.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: 1.25rem 1.5rem; margin: 0; max-width: 65ch; }
+.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: 1.25rem 1.5rem; margin: 0; max-width: 65ch; padding: 1.25rem; background: var(--panel); }
 .figures div { display: grid; gap: 0.3rem; align-content: start; min-width: 0; }
 .figures dt { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
 .figures dd { margin: 0; font-size: var(--s-sm); color: var(--muted); line-height: 1.4; }
 .limits li::before { content: counter(c, decimal-leading-zero); color: var(--muted); font-size: var(--s-sm); font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
-.ex-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: clamp(3rem, 7vw, 5rem); border-top: 1px solid var(--ink); }
+.ex-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: clamp(3rem, 7vw, 5rem); border-top: 1px solid var(--rule); }
 .ex-nav a { display: grid; gap: 0.25rem; padding-top: 1.25rem; text-decoration: none; min-width: 0; }
 .ex-nav a.next { text-align: right; grid-column: 2; }
 .ex-nav a:hover .t { text-decoration: underline; text-underline-offset: 4px; }
 
-footer { margin-top: 5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+footer { margin-top: 5rem; padding: 1rem 1.25rem; background: var(--panel); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 
 @media (max-width: 640px) {
   .sec { grid-template-columns: 1fr; gap: 0.5rem; }

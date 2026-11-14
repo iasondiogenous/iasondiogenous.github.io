@@ -7,6 +7,16 @@
 <title>Iason Diogenous — Portfolio</title>
 <meta name="description" content="Portfolio of Iason Diogenous: product design and development where design, engineering and business meet.">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iasondiogenous.github.io/">
+<meta property="og:title" content="Iason Diogenous — Portfolio">
+<meta property="og:description" content="A product creator and developer who speaks the languages of Design, Engineering and Business.">
+<meta property="og:image" content="https://iasondiogenous.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&display=swap">
@@ -52,7 +62,8 @@ a:focus-visible { outline: 2px solid var(--dot); outline-offset: 4px; }
   margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);
 }
 .sign .wrap { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem 2rem; padding-block: 1rem; flex-wrap: wrap; }
-.sign .name { font-weight: 600; text-decoration: none; letter-spacing: -0.01em; }
+.sign .name { font-weight: 600; text-decoration: none; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 0.6rem; }
+.sign .name img { height: 1.65rem; width: auto; display: block; }
 .plan { position: relative; display: flex; gap: 0.25rem 1.75rem; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
 .plan a { position: relative; padding-left: 14px; text-decoration: none; font-size: var(--s-sm); color: var(--muted); transition: color .3s; }
 .plan a:hover { color: var(--ink); }
@@ -190,7 +201,7 @@ footer { margin-top: 5rem; padding: 1rem 1.25rem; background: var(--panel); disp
 <body>
 <header class="sign">
   <div class="wrap">
-    <a class="name" href="#top">Iason Diogenous</a>
+    <a class="name" href="#top"><img src="images/logo-mark.png" alt="" width="400" height="379">Iason Diogenous</a>
     <nav aria-label="Main">
       <ul class="plan" id="plan">
         <li><a href="#top" data-zone="home">Home</a></li>
